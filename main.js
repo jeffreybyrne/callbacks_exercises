@@ -159,7 +159,7 @@ console.log( 'The total number of sales is:', numSales );
 /*
   Calculate the total number of 'purchases'.
 */
-let numPurchases;
+let numPurchases = transactions.filter(item => item['type'] == 'purchase').length;
 
 console.log( 'The total number of purchases is:', numPurchases );
 
