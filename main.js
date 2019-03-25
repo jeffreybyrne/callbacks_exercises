@@ -324,7 +324,14 @@ console.log( 'The sum of all purchases is:', sumPurchases );
   HINT(S):
   - Unlike 'QUESTION 08' and 'QUESTION 09', here we're interested in both 'sale' and 'purchase' transactions.
 */
-let netProfit;
+let netProfit = transactions          //Same as the previous question, just without the filter
+  .reduce((total, item) => {
+    itemTotal = item['items']
+      .reduce(function (acc, item) {
+        return acc + item['price'];
+      }, 0)
+    return total + itemTotal
+  }, 0)
 
 console.log( 'The net profit is:', netProfit );
 
