@@ -297,7 +297,16 @@ console.log( 'The sum of the first sale items is:', sumFirstSale );
   - Make sure to include 'price' information from *all* purchases.
 */
 
-let sumPurchases;
+let sumPurchases= transactions
+  .filter(isPurchase)                 //Filter down to only the purchases
+  .reduce((total, item) => {          //For each purchase, use reduce to add the current item's total to the accumulator
+    itemTotal = item['items']         //In order to get the total of the current purchase, use reduce in the same way as the previous question
+      .reduce(function (acc, item) {
+        return acc + item['price'];
+      }, 0)
+    return total + itemTotal
+  }, 0)
+
 
 console.log( 'The sum of all purchases is:', sumPurchases );
 
