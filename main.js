@@ -130,7 +130,9 @@ console.log( 'The total number of transactions is:', totalTransactions );
   HINT(S):
   - Not all transactions are 'sales'.
 */
-let numSales = transactions.filter(item => item['type'] == 'sale').length;
+const isSale = item => item['type'] == 'sale'
+
+let numSales = transactions.filter(isSale).length;
 /*
   Hey, welcome to the first question!
 
@@ -159,7 +161,9 @@ console.log( 'The total number of sales is:', numSales );
 /*
   Calculate the total number of 'purchases'.
 */
-let numPurchases = transactions.filter(item => item['type'] == 'purchase').length;
+const isPurchase = item => item['type'] == 'purchase'
+
+let numPurchases = transactions.filter(isPurchase).length;
 
 console.log( 'The total number of purchases is:', numPurchases );
 
@@ -173,6 +177,7 @@ console.log( 'The total number of purchases is:', numPurchases );
   HINT(S):
   - Don't forget that 'purchases' can also be made in 'cash'!
 */
+
 let numCashSales = transactions.filter(item => (item['type'] == 'sale' && item['paymentMethod'] == 'cash')).length;
 
 console.log( 'The total number of cash sales is:', numCashSales );
@@ -246,7 +251,19 @@ console.log( 'The unique customers are:', uniqueCustomers );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-let bigSpenders;
+
+function hasCustomer(item) {
+  return item.hasOwnProperty('customer')
+}
+
+function nameToCount(item) {
+  new_obj = {name: item['customer'], numItems: item['items'].length}
+  return new_obj
+}
+
+let bigSpenders = transactions
+  .filter(item => (isSale(item)) && (hasCustomer(item)) && item['items'].length > 4)
+  .map(nameToCount);
 
 console.log( 'The "big spenders" are:', bigSpenders );
 
