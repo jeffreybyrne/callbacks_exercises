@@ -277,7 +277,11 @@ console.log( 'The "big spenders" are:', bigSpenders );
   HINT(S):
   - Transactions don't have 'prices', but their 'items' do!
 */
-let sumFirstSale;
+let sumFirstSale = transactions
+  .filter(isSale)[0]['items']
+  .reduce(function (acc, item) {
+    return acc + item['price'];
+}, 0)
 
 console.log( 'The sum of the first sale items is:', sumFirstSale );
 
