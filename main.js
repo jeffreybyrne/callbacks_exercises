@@ -204,7 +204,8 @@ console.log( 'The total number of credit purchases is:', numCreditPurchases );
   - The assembled array should be made up of strings, not full `transaction` objects.
   - This array is allowed to contain duplicate values.
 */
-let allVendors;
+
+let allVendors = transactions.filter(item => (item.hasOwnProperty('vendor'))).map(item => item['vendor']);
 
 console.log( 'The vendors are:', allVendors );
 
