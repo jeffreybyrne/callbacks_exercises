@@ -222,7 +222,13 @@ console.log( 'The vendors are:', allVendors );
   - The assembled array should be made up of strings, not full `transaction` objects.
   - Make sure that the resulting array *does not* include any duplicates.
 */
-let uniqueCustomers;
+
+let uniqueCustomers = (transactions
+  .filter(item => (item.hasOwnProperty('customer')))  //filter down to only results that have a customer
+  .map(item => item['customer']))                     //map back the customer name from those items
+  .filter(function(customer, idxPos, array) {         //for each customer name, check to see if the current index position is the first instance
+     return array.indexOf(customer) == idxPos;
+    })
 
 console.log( 'The unique customers are:', uniqueCustomers );
 
