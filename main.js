@@ -348,7 +348,7 @@ console.log( 'The net profit is:', netProfit );
 let mostItems = transactions
   .filter(isSale)
   .map(item => item['items'].length)
-  .sort(function(a, b){return b-a})[0];
+  .sort(function(a, b) {return b-a})[0];
 
 console.log( 'The most items sold in a single transaction is:', mostItems );
 
@@ -359,6 +359,11 @@ console.log( 'The most items sold in a single transaction is:', mostItems );
 /*
   Calculate the sum of the 'purchase' with the fewest items.
 */
-let sumOfSmallestPurchase;
+let sumOfSmallestPurchase = transactions
+  .filter(isPurchase)                                                               //Filter down to just the purchases
+  .sort(function(a, b) {return a['items'].length - b['items'].length})[0]['items']  //Sort the list based on the length of the 'items' list in each purchase
+  .reduce(function (acc, item) {                                                    //Finally, reduce and sum up the price
+    return acc + item['price'];
+}, 0)
 
 console.log( 'The sum of the smallest purchase is:', sumOfSmallestPurchase );
